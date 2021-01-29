@@ -1,9 +1,10 @@
 body{
-    font-size: 25px !important;
+    font-size: 35px !important;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: lightskyblue !important;
+    background-color: #E3BF28 !important;
+    font-family: 'Passion One', cursive !important;
 }
 
 canvas{
@@ -13,4 +14,9 @@ canvas{
 
 .title{
     font-size: 50px;
+}
+.style{
+    font-family: 'Parisienne', cursive;
+    font-size: 40px;
+    font-weight: bold;
 }
