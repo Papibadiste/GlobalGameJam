@@ -15,7 +15,7 @@ function traitReq(requete, reponse){
     if(monObj.pathname === "/"){
         monObj.pathname = "/index.html";
     }
-    
+
     if(monObj.pathname !== "/favicon.ico"){
         var dataPreparation = gestionPage.preparerLesDonnees(monObj);
         var data = {};
