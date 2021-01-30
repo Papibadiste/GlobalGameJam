@@ -66,6 +66,8 @@ function create(){
     decor = this.add.sprite(positionDecorX,positionDecorY,"decor")
     wood = this.add.sprite(positionDecorX, 150 ,"wood")
     this.add.text(270 , 70, "Ego meum  ", policetitre)
+    txtload = this.add.text(270 , 70, "Ego meum  ", policehistoria2)
+    txtload.setVisible(false)
     this.add.text(295 , 120, "amissis ", policetitre)
     this.add.text(315 , 175, "Latine ", policetitre)
     wood.setScale( 0.8,0.60);
@@ -151,12 +153,13 @@ function update(time, delta){
         textp3n4 = this.add.text(200, 335, "rencontres. C'est pour ca que je t'ai abbandonné dans", policep3)
         textp3n5 = this.add.text(200, 355, "le dessert car j'ai trouvé mieux ailleur. ;D", policep3)
         //paragraphe4
-        textp4n1 = this.add.text(200, 385, "Vous savez, moi je ne crois pas qu'il y ait de bonne ou ", policep4)
-        textp4n2 = this.add.text(200, 405, "de mauvaise situation Moi, si je devais résumer ma vie ", policep4)
-        textp4n3 = this.add.text(200, 425, "aujourd'hui avec toi, je dirais que c'est d'abord des ", policep4)
-        textp4n4 = this.add.text(200, 445, "rencontres. C'est pour ca que je t'ai abbandonné dans", policep4)
-        textp4n5 = this.add.text(200, 465, "le dessert car j'ai trouvé mieux ailleur. ;D", policep4)
-        textp4n6 = this.add.text(200, 495, "Américana John", policep4)
+        textp4n1 = this.add.text(200, 385, "Par contre si tu as reussi à récuperer les 4 morceaux", policep4)
+        textp4n2 = this.add.text(200, 405, "pourrais-tu me les ramener? Car comment dire ?", policep4)
+        textp4n3 = this.add.text(200, 425, "Je commence à perdre mon latin moi aussi et cela", policep4)
+        textp4n4 = this.add.text(200, 445, "commence à me déranger dans la vie de tous les jours. ", policep4)
+        textp4n5 = this.add.text(200, 465, "Sois utile pour une fois :D", policep4)
+        textp4n6 = this.add.text(200, 495, "Cordialement,", policep4)
+        textp4n6 = this.add.text(200, 515, "Américana John", policep4)
     }
 
     if(historipaper !== null){
