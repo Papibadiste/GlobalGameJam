@@ -51,7 +51,7 @@ function preload(){
     jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("map","json/niveautest.json");
     jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
-    jeu.scene.load.tilemapTiledJSON("maplvl2","json/niveau_3.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl2","json/niveau_2.json");
 
     // perso
 
@@ -277,8 +277,6 @@ function update(time, delta){
             this.sound.play("levelsong");
 
         }
-
-
         // world
         jeu.world.initialiserWorld2();
 
