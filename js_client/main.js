@@ -15,11 +15,17 @@ var soundready = 1 ;
 var pophistoria = 0 ;
 var paperready = 1 ;
 var historipaper = null ;
+var camera = 0
 
 var level1finish = 0;
+var level1start = 0;
 var level2finish = 0;
+var level2start = 0;
 var level3finish = 0;
+var level3start = 0;
 var level4finish = 0;
+var level4start = 0;
+var level5start = 0;
 
 var policehistoria = {
     fontSize : "12px",
@@ -78,15 +84,15 @@ function create(){
     wood.setScale( 0.8,0.60);
 
     //level card
-    levelselect1 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30);
+    levelselect3 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(265, 415, "3", policetitre)
-    levelselect2 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30);
+    levelselect4 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(390, 415, "4", policetitre)
-    levelselect3 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30);
+    levelselect1 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(265, 315, "1", policetitre)
-    levelselect4 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30);
+    levelselect2 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(390, 315, "2", policetitre)
-    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30);
+    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(510, 365, "5", policetitre)
     redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
     historia = this.add.sprite(positionDecorX, 550 ,"levelselect").setScale( 1.3 , 0.30).setInteractive();
@@ -115,17 +121,14 @@ function create(){
         }
     })
 
-    // niveau 1 + camera test
-    this.tilemap = this.make.tilemap({key: "map"});
+    //btn level start
+    levelselect1.on('pointerdown',function(){
+        level1start = 1
+        camera = 1
+    })
 
-    this.tileset = this.tilemap.addTilesetImage("tilesheet","tiles");
-
-    this.downLayer = this.tilemap.createStaticLayer("bot", this.tileset,0,0);
-    this.worldLayer = this.tilemap.createStaticLayer("world", this.tileset,0,0);
-    this.topLayer = this.tilemap.createStaticLayer("top", this.tileset,0,0);
-    
+    //camera
     var cursors = this.input.keyboard.createCursorKeys();
-
     var controlConfig= {
         camera : this.cameras.main,
         left: cursors.left,
@@ -134,6 +137,7 @@ function create(){
         down : cursors.down,
         speed : 1
     }
+
     controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
 }
@@ -226,7 +230,27 @@ function update(time, delta){
     }
 
 //end menu
+ if (level1start === 1){
+     level1start = 0
+    // niveau 1 + camera test
+    this.tilemap = this.make.tilemap({key: "map"});
 
-// camera test
-controls.update(delta);
+    this.tileset = this.tilemap.addTilesetImage("tilesheet","tiles");
+
+    this.downLayer = this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+    this.worldLayer = this.tilemap.createStaticLayer("world", this.tileset,0,0);
+    this.topLayer = this.tilemap.createStaticLayer("top", this.tileset,0,0);
+
+
+
+
+
+
+ }
+
+    // camera test
+    if(camera === 1){
+        controls.update(delta);
+    }
+
 }
