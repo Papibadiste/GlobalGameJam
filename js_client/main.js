@@ -51,6 +51,7 @@ function preload(){
     jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("map","json/niveautest.json");
     jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl2","json/niveau_3.json");
 
     // perso
 
@@ -126,6 +127,9 @@ function create(){
     //pop up level
     levelselect1.on('pointerdown',function(){
         level1start = 1
+    })
+    levelselect2.on('pointerdown',function(){
+        level2start = 1
     })
     levelselect3.on('pointerdown',function(){
         level3start = 1
@@ -253,8 +257,30 @@ function update(time, delta){
         }
 
 
+
+
         // world
         jeu.world.initialiserWorld3();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+        jeu.player.aPlayer.anims.play("playerWalk");
+
+    }
+
+    if (level2start === 1){
+        level2start = 0
+        game.sound.stopAll();
+
+        if (soundactive === 1 ) {
+            this.sound.play("levelsong");
+
+        }
+
+
+        // world
+        jeu.world.initialiserWorld2();
 
         // player
         jeu.player.initialiserPlayer();
