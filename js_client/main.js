@@ -1,15 +1,3 @@
-var config = {
-    type : Phaser.AUTO,
-    width : 800,
-    height : 600,
-    scene : {
-        preload : preload,
-        create : create,
-        update : update
-    }
-}
-
-const game = new Phaser.Game(config);
 var soundactive = 0 ;
 var soundready = 1 ;
 var pophistoria = 0 ;
@@ -33,7 +21,13 @@ var policehistoria2 = {
     fontFamily: "Miss Fajardose"
 }
 
+var jeu = {
+    scene : null,
+    world : world,
+    player : player
+}
 function preload(){
+    jeu.scene = this;
     this.load.image("decor","images/decor/png/BG.png");
     this.load.image("wood","images/menu/wood.png");
     this.load.image("levelselect","images/menu/letter.png");
@@ -45,9 +39,13 @@ function preload(){
 
     // niveau 1
 
-    this.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
-    this.load.tilemapTiledJSON("map","json/niveautest.json");
+    jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
+    jeu.scene.load.tilemapTiledJSON("map","json/niveautest.json");
 
+    // perso
+
+    jeu.scene.load.atlas("player","images/perso/player.png", "images/perso/playerAtlas.json");
+    
 
 }
 
@@ -115,27 +113,19 @@ function create(){
         }
     })
 
-    // niveau 1 + camera test
-    this.tilemap = this.make.tilemap({key: "map"});
+    // world
 
-    this.tileset = this.tilemap.addTilesetImage("tilesheet","tiles");
+    jeu.world.initialiserWorld();
 
-    this.downLayer = this.tilemap.createStaticLayer("bot", this.tileset,0,0);
-    this.worldLayer = this.tilemap.createStaticLayer("world", this.tileset,0,0);
-    this.topLayer = this.tilemap.createStaticLayer("top", this.tileset,0,0);
     
-    var cursors = this.input.keyboard.createCursorKeys();
+    // player 
+    jeu.player.initialiserPlayer();
+    jeu.player.generatePlayerAnimations();
+    jeu.player.aPlayer.anims.play("playerWalk");
 
-    var controlConfig= {
-        camera : this.cameras.main,
-        left: cursors.left,
-        right : cursors.right,
-        up : cursors.up,
-        down : cursors.down,
-        speed : 1
-    }
-    controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+    
 
+    
 }
 function update(time, delta){
 //start menu
@@ -226,7 +216,5 @@ function update(time, delta){
     }
 
 //end menu
-
-// camera test
-controls.update(delta);
 }
+
