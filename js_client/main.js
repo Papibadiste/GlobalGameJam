@@ -1,5 +1,5 @@
 
-var soundactive = 0 ;
+var soundactive = 1 ;
 
 var soundready = 1 ;
 var pophistoria = 0 ;
@@ -122,16 +122,12 @@ function create(){
         }
     })
 
+    //pop up level
+    levelselect1.on('pointerdown',function(){
+        level1start = 1
+    })
 
-    // world
 
-    jeu.world.initialiserWorld();
-
-    
-    // player 
-    jeu.player.initialiserPlayer();
-    jeu.player.generatePlayerAnimations();
-    jeu.player.aPlayer.anims.play("playerWalk");
 
     
 
@@ -232,10 +228,20 @@ function update(time, delta){
   if (level1start === 1){
      level1start = 0
      game.sound.stopAll();
+
      if (soundactive === 1 ) {
          this.sound.play("levelsong");
 
      }
+
+
+      // world
+      jeu.world.initialiserWorld();
+
+      // player
+      jeu.player.initialiserPlayer();
+      jeu.player.generatePlayerAnimations();
+      jeu.player.aPlayer.anims.play("playerWalk");
 
  }
 }
