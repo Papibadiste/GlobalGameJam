@@ -1,13 +1,21 @@
+
 var soundactive = 0 ;
+
 var soundready = 1 ;
 var pophistoria = 0 ;
 var paperready = 1 ;
 var historipaper = null ;
+var camera = 0
 
 var level1finish = 0;
+var level1start = 0;
 var level2finish = 0;
+var level2start = 0;
 var level3finish = 0;
+var level3start = 0;
 var level4finish = 0;
+var level4start = 0;
+var level5start = 0;
 
 var policehistoria = {
     fontSize : "12px",
@@ -36,6 +44,7 @@ function preload(){
     this.load.image("paper","images/menu/paper.png");
     this.load.image("redcross","images/menu/redcross.png");
     this.load.audio("rosa","sounds/rosa.ogg");
+    this.load.audio("levelsong","sounds/levelsong.ogg");
 
     // niveau 1
 
@@ -76,15 +85,15 @@ function create(){
     wood.setScale( 0.8,0.60);
 
     //level card
-    levelselect1 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30);
+    levelselect3 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(265, 415, "3", policetitre)
-    levelselect2 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30);
+    levelselect4 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(390, 415, "4", policetitre)
-    levelselect3 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30);
+    levelselect1 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(265, 315, "1", policetitre)
-    levelselect4 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30);
+    levelselect2 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(390, 315, "2", policetitre)
-    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30);
+    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(510, 365, "5", policetitre)
     redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
     historia = this.add.sprite(positionDecorX, 550 ,"levelselect").setScale( 1.3 , 0.30).setInteractive();
@@ -113,6 +122,7 @@ function create(){
         }
     })
 
+
     // world
 
     jeu.world.initialiserWorld();
@@ -124,6 +134,7 @@ function create(){
     jeu.player.aPlayer.anims.play("playerWalk");
 
     
+
 
     
 }
@@ -216,5 +227,21 @@ function update(time, delta){
     }
 
 //end menu
+
+  
+  if (level1start === 1){
+     level1start = 0
+     game.sound.stopAll();
+     if (soundactive === 1 ) {
+         this.sound.play("levelsong");
+
+     }
+
+ }
 }
+
+
+ 
+
+
 
