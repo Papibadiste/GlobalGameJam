@@ -11,6 +11,16 @@ var world = {
         this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
         this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
         this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+
+    },
+
+    initialiserWorld3 : function(){
+        this.tilemap = jeu.scene.make.tilemap({key: "maplvl3"});
+        this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
+        this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+        this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
+        this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+
     }
     
 }
