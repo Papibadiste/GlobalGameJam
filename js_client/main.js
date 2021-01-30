@@ -147,15 +147,15 @@ function update(time, delta){
         textp2n3 = this.add.text(200, 225, "que tu lis vient de ton pere biologique Américana John.", policep2)
         textp2n4 = this.add.text(200, 245, "Aventurier qui a prit sa retraite au Royaume de cristal", policep2)
         //paragraphe3
-        textp3n1 = this.add.text(200, 275, "Vous savez, moi je ne crois pas qu'il y ait de bonne ou ", policep3)
+        textp3n1 = this.add.text(200, 275, "Car tu sais, moi je ne crois pas qu'il y ait de bonne ou ", policep3)
         textp3n2 = this.add.text(200, 295, "de mauvaise situation Moi, si je devais résumer ma vie ", policep3)
         textp3n3 = this.add.text(200, 315, "aujourd'hui avec toi, je dirais que c'est d'abord des ", policep3)
         textp3n4 = this.add.text(200, 335, "rencontres. C'est pour ca que je t'ai abbandonné dans", policep3)
         textp3n5 = this.add.text(200, 355, "le dessert car j'ai trouvé mieux ailleur. ;D", policep3)
         //paragraphe4
-        textp4n1 = this.add.text(200, 385, "Par contre si tu as reussi à récuperer les 4 morceaux", policep4)
+        textp4n1 = this.add.text(200, 385, "Par contre si tu as reussi à récuperer les 4 morceaux?", policep4)
         textp4n2 = this.add.text(200, 405, "pourrais-tu me les ramener? Car comment dire ?", policep4)
-        textp4n3 = this.add.text(200, 425, "Je commence à perdre mon latin moi aussi et cela", policep4)
+        textp4n3 = this.add.text(200, 425, "J'aimerai bien retrouver ma notoriété car cela ,", policep4)
         textp4n4 = this.add.text(200, 445, "commence à me déranger dans la vie de tous les jours. ", policep4)
         textp4n5 = this.add.text(200, 465, "Sois utile pour une fois :D", policep4)
         textp4n6 = this.add.text(200, 495, "Cordialement,", policep4)
