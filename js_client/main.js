@@ -1,16 +1,6 @@
-var config = {
-    type : Phaser.AUTO,
-    width : 800,
-    height : 600,
-    scene : {
-        preload : preload,
-        create : create,
-        update : update
-    }
-}
 
-const game = new Phaser.Game(config);
-var soundactive = 1 ;
+var soundactive = 0 ;
+
 var soundready = 1 ;
 var pophistoria = 0 ;
 var paperready = 1 ;
@@ -39,7 +29,13 @@ var policehistoria2 = {
     fontFamily: "Miss Fajardose"
 }
 
+var jeu = {
+    scene : null,
+    world : world,
+    player : player
+}
 function preload(){
+    jeu.scene = this;
     this.load.image("decor","images/decor/png/BG.png");
     this.load.image("wood","images/menu/wood.png");
     this.load.image("levelselect","images/menu/letter.png");
@@ -52,9 +48,13 @@ function preload(){
 
     // niveau 1
 
-    this.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
-    this.load.tilemapTiledJSON("map","json/niveautest.json");
+    jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
+    jeu.scene.load.tilemapTiledJSON("map","json/niveautest.json");
 
+    // perso
+
+    jeu.scene.load.atlas("player","images/perso/player.png", "images/perso/playerAtlas.json");
+    
 
 }
 
@@ -122,26 +122,21 @@ function create(){
         }
     })
 
-    //btn level start
-    levelselect1.on('pointerdown',function(){
-        level1start = 1
-        camera = 1
-        soundready = 1
-    })
 
-    //camera
-    var cursors = this.input.keyboard.createCursorKeys();
-    var controlConfig= {
-        camera : this.cameras.main,
-        left: cursors.left,
-        right : cursors.right,
-        up : cursors.up,
-        down : cursors.down,
-        speed : 1
-    }
+    // world
 
-    controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
+    jeu.world.initialiserWorld();
 
+    
+    // player 
+    jeu.player.initialiserPlayer();
+    jeu.player.generatePlayerAnimations();
+    jeu.player.aPlayer.anims.play("playerWalk");
+
+    
+
+
+    
 }
 function update(time, delta){
 //start menu
@@ -232,32 +227,21 @@ function update(time, delta){
     }
 
 //end menu
- if (level1start === 1){
+
+  
+  if (level1start === 1){
      level1start = 0
      game.sound.stopAll();
      if (soundactive === 1 ) {
          this.sound.play("levelsong");
 
      }
-    // niveau 1 + camera test
-    this.tilemap = this.make.tilemap({key: "map"});
-
-    this.tileset = this.tilemap.addTilesetImage("tilesheet","tiles");
-
-    this.downLayer = this.tilemap.createStaticLayer("bot", this.tileset,0,0);
-    this.worldLayer = this.tilemap.createStaticLayer("world", this.tileset,0,0);
-    this.topLayer = this.tilemap.createStaticLayer("top", this.tileset,0,0);
-
-
-
-
-
 
  }
-
-    // camera test
-    if(camera === 1){
-        controls.update(delta);
-    }
-
 }
+
+
+ 
+
+
+
