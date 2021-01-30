@@ -43,7 +43,14 @@ function preload(){
     this.load.image("redcross","images/menu/redcross.png");
     this.load.audio("rosa","sounds/rosa.ogg");
 
+    // niveau 1
+
+    this.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
+    this.load.tilemapTiledJSON("map","json/niveautest.json");
+
+
 }
+
 function create(){
 //start menu
     var positionDecorX = this.cameras.main.centerX;
@@ -108,6 +115,26 @@ function create(){
         }
     })
 
+    // niveau 1 + camera test
+    this.tilemap = this.make.tilemap({key: "map"});
+
+    this.tileset = this.tilemap.addTilesetImage("tilesheet","tiles");
+
+    this.downLayer = this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+    this.worldLayer = this.tilemap.createStaticLayer("world", this.tileset,0,0);
+    this.topLayer = this.tilemap.createStaticLayer("top", this.tileset,0,0);
+    
+    var cursors = this.input.keyboard.createCursorKeys();
+
+    var controlConfig= {
+        camera : this.cameras.main,
+        left: cursors.left,
+        right : cursors.right,
+        up : cursors.up,
+        down : cursors.down,
+        speed : 1
+    }
+    controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
 }
 function update(time, delta){
@@ -199,4 +226,7 @@ function update(time, delta){
     }
 
 //end menu
+
+// camera test
+controls.update(delta);
 }
