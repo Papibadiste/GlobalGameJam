@@ -159,7 +159,7 @@ function update(time, delta){
         textp4n4 = this.add.text(200, 445, "commence à me déranger dans la vie de tous les jours. ", policep4)
         textp4n5 = this.add.text(200, 465, "Sois utile pour une fois :D", policep4)
         textp4n6 = this.add.text(200, 495, "Cordialement,", policep4)
-        textp4n6 = this.add.text(200, 515, "Américana John", policep4)
+        textp4n7 = this.add.text(200, 515, "Américana John", policep4)
     }
 
     if(historipaper !== null){
@@ -191,6 +191,7 @@ function update(time, delta){
                 textp4n4.setVisible(false)
                 textp4n5.setVisible(false)
                 textp4n6.setVisible(false)
+                textp4n7.setVisible(false)
             }
         })
     }
