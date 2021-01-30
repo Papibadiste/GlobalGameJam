@@ -4,11 +4,11 @@ var gestionPage = {
         reponse.write(data.pageHtml);
         reponse.end();
     },
-    
+
     preparerLesDonnees : function(monObj){
         var indexDuPoint = monObj.pathname.indexOf(".");
         var extension = monObj.pathname.substring(indexDuPoint, monObj.pathname.length);
-    
+
         var data ={
             contentType : "",
             encodage : "",
@@ -16,35 +16,31 @@ var gestionPage = {
             fichier: monObj.pathname.substring(1,monObj.pathname.length),
         }
         switch(extension){
-            case ".html" : 
+            case ".html" :
                 data.contentType = "text/html";
                 data.encodage = "UTF-8";
                 data.dossier = "html/"
-            break;
+                break;
             case ".css" :
                 data.contentType = "text/css";
                 data.dossier = "css/"
-            break;
+                break;
             case ".js" :
                 data.contentType = "application/javascript";
                 data.dossier = "js_client/"
-            break;
+                break;
             case ".png" :
                 data.contentType = "image/png";
-                data.dossier = "assets/images"
-            break
+                data.dossier = "assets/"
+                break
             case ".jpg" :
                 data.contentType = "image/jpeg";
-                data.dossier = "assets/images"
-            break
-            case ".json" :
-                data.contentType = "application/json";
-                data.dossier = "assets/json"
-            break
+                data.dossier = "assets/"
+                break
             case ".ogg" :
                 data.contentType = "audio/ogg";
-                data.dossier = "assets/sounds"
-            break
+                data.dossier = "assets/"
+                break
             default : console.log("Erreur");
         }
         return data;

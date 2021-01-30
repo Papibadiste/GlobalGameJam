@@ -1,4 +1,6 @@
 body{
+    font-family: 'Shojumaru', cursive;
+    font-family: 'Miss Fajardose', cursive;
     font-size: 35px !important;
     display: flex;
     justify-content: center;
@@ -12,11 +14,7 @@ canvas{
     margin-right: auto;
 }
 
-.title{
-    font-size: 50px;
-}
 .style{
-    font-family: 'Parisienne', cursive;
     font-size: 40px;
     font-weight: bold;
 }
