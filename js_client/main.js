@@ -10,7 +10,7 @@ var config = {
 }
 
 const game = new Phaser.Game(config);
-var soundactive = 0 ;
+var soundactive = 1 ;
 var soundready = 1 ;
 var pophistoria = 0 ;
 var paperready = 1 ;
@@ -48,6 +48,7 @@ function preload(){
     this.load.image("paper","images/menu/paper.png");
     this.load.image("redcross","images/menu/redcross.png");
     this.load.audio("rosa","sounds/rosa.ogg");
+    this.load.audio("levelsong","sounds/levelsong.ogg");
 
     // niveau 1
 
@@ -125,6 +126,7 @@ function create(){
     levelselect1.on('pointerdown',function(){
         level1start = 1
         camera = 1
+        soundready = 1
     })
 
     //camera
@@ -232,6 +234,11 @@ function update(time, delta){
 //end menu
  if (level1start === 1){
      level1start = 0
+     game.sound.stopAll();
+     if (soundactive === 1 ) {
+         this.sound.play("levelsong");
+
+     }
     // niveau 1 + camera test
     this.tilemap = this.make.tilemap({key: "map"});
 
