@@ -12,7 +12,7 @@ var world = {
     level3finish : 0,
     level4finish : 0,
 
-    initialiserWorld : function(){
+    initialiserWorld2 : function(){
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
         this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
         this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
@@ -56,16 +56,26 @@ var world = {
         this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
         this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
         this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+        this.overlapLayer = this.tilemap.createDynamicLayer("overlap",  this.tileset,0,0);
 
-    },
+        this.positionDebut = this.tilemap.findObject("Object" , obj => obj.name === "debut")
+        this.positionfin = this.tilemap.findObject("Object" , obj => obj.name === "fin")
 
-    initialiserWorld2 : function(){
-        this.tilemap = jeu.scene.make.tilemap({key: "maplvl2"});
-        this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
-        this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
-        this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
-        this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+        this.worldLayer.setCollisionByProperty({Collides : true});
+        jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+        this.overlapLayer.setTileIndexCallback(112,this.finlevel2,this)
+        this.overlapLayer.setTileIndexCallback(19,this.finlevel2,this)
+        this.overlapLayer.setTileIndexCallback(20,this.finlevel2,this)
 
+        this.overlapLayer.setTileIndexCallback(43,this.finlevel2,this)
+        this.overlapLayer.setTileIndexCallback(44,this.finlevel2,this)
+
+        this.overlapLayer.setTileIndexCallback(90,this.finlevel2,this)
+        this.overlapLayer.setTileIndexCallback(91,this.finlevel2,this)
+    },finlevel2 : function(){
+        jeu.player.finlevel()
+        this.level3finish = 1
+        this.fin = 1
 
     }
     
