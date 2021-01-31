@@ -51,6 +51,7 @@ function preload(){
 
     jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("map","json/niveau_2.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
 
     // perso
 
@@ -124,8 +125,12 @@ function create(){
     })
 
     //pop up level
-    levelselect1.on('pointerdown',function(){
-        level1start = 1
+    levelselect2.on('pointerdown',function(){
+        level2start = 1
+    })
+
+    levelselect3.on('pointerdown',function(){
+        level3start = 1
     })
 
     jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
@@ -227,8 +232,8 @@ function update(time, delta){
 //end menu
 
 
-  if (level1start === 1){
-     level1start = 0
+  if (level2start === 1){
+     level2start = 0
      game.sound.stopAll();
     command = 1;
      if (soundactive === 1 ) {
@@ -238,7 +243,7 @@ function update(time, delta){
 
 
       // world
-      jeu.world.initialiserWorld();
+      jeu.world.initialiserWorld2();
 
       // player
       jeu.player.initialiserPlayer();
@@ -247,6 +252,47 @@ function update(time, delta){
       jeu.world.gererCollider();
 
       jeu.world.gererCamera();
+
+
+
+
+    }
+
+    if ( jeu.world.fin === 1){
+        jeu.player = player
+        jeu.scene.scene.restart();
+        jeu.world.fin = 2
+    }
+    if ( jeu.world.fin === 0) {
+        if (command === 1) {
+            if (jeu.cursor.left.isDown) {
+                console.log("Coucou");
+            }
+
+            jeu.player.gererDeplacement();
+        }
+    }
+
+    if (level3start === 1){
+        level3start = 0
+        game.sound.stopAll();
+        command = 1;
+        if (soundactive === 1 ) {
+            this.sound.play("levelsong");
+
+        }
+
+
+        // world
+        jeu.world.initialiserWorld3();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+
+        jeu.world.gererCollider();
+
+        jeu.world.gererCamera();
 
 
 
