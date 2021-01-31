@@ -89,6 +89,8 @@ function create(){
     decor = this.add.sprite(positionDecorX,positionDecorY,"decor")
     wood = this.add.sprite(positionDecorX, 150 ,"wood")
     this.add.text(270 , 70, "Ego meum  ", policetitre)
+    txtload = this.add.text(270 , 70, "Ego meum  ", policehistoria2)
+    txtload.setVisible(false)
     this.add.text(295 , 120, "amissis ", policetitre)
     this.add.text(315 , 175, "Latine ", policetitre)
     wood.setScale( 0.8,0.60);
@@ -204,18 +206,19 @@ function update(time, delta){
         textp2n3 = this.add.text(200, 225, "que tu lis vient de ton pere biologique Américana John.", policep2)
         textp2n4 = this.add.text(200, 245, "Aventurier qui a prit sa retraite au Royaume de cristal", policep2)
         //paragraphe3
-        textp3n1 = this.add.text(200, 275, "Vous savez, moi je ne crois pas qu'il y ait de bonne ou ", policep3)
+        textp3n1 = this.add.text(200, 275, "Car tu sais, moi je ne crois pas qu'il y ait de bonne ou ", policep3)
         textp3n2 = this.add.text(200, 295, "de mauvaise situation Moi, si je devais résumer ma vie ", policep3)
         textp3n3 = this.add.text(200, 315, "aujourd'hui avec toi, je dirais que c'est d'abord des ", policep3)
         textp3n4 = this.add.text(200, 335, "rencontres. C'est pour ca que je t'ai abbandonné dans", policep3)
         textp3n5 = this.add.text(200, 355, "le dessert car j'ai trouvé mieux ailleur. ;D", policep3)
         //paragraphe4
-        textp4n1 = this.add.text(200, 385, "Vous savez, moi je ne crois pas qu'il y ait de bonne ou ", policep4)
-        textp4n2 = this.add.text(200, 405, "de mauvaise situation Moi, si je devais résumer ma vie ", policep4)
-        textp4n3 = this.add.text(200, 425, "aujourd'hui avec toi, je dirais que c'est d'abord des ", policep4)
-        textp4n4 = this.add.text(200, 445, "rencontres. C'est pour ca que je t'ai abbandonné dans", policep4)
-        textp4n5 = this.add.text(200, 465, "le dessert car j'ai trouvé mieux ailleur. ;D", policep4)
-        textp4n6 = this.add.text(200, 495, "Américana John", policep4)
+        textp4n1 = this.add.text(200, 385, "Par contre si tu as reussi à récuperer les 4 morceaux?", policep4)
+        textp4n2 = this.add.text(200, 405, "pourrais-tu me les ramener? Car comment dire ?", policep4)
+        textp4n3 = this.add.text(200, 425, "J'aimerai bien retrouver ma notoriété car cela ,", policep4)
+        textp4n4 = this.add.text(200, 445, "commence à me déranger dans la vie de tous les jours. ", policep4)
+        textp4n5 = this.add.text(200, 465, "Sois utile pour une fois :D", policep4)
+        textp4n6 = this.add.text(200, 495, "Cordialement,", policep4)
+        textp4n7 = this.add.text(200, 515, "Américana John", policep4)
     }
 
     if(historipaper !== null){
@@ -247,6 +250,7 @@ function update(time, delta){
                 textp4n4.setVisible(false)
                 textp4n5.setVisible(false)
                 textp4n6.setVisible(false)
+                textp4n7.setVisible(false)
             }
         })
     }
@@ -389,7 +393,6 @@ function update(time, delta){
 
 
     }
-
     if (level5start === 1){
         level5start = 0
         game.sound.stopAll();
@@ -420,7 +423,7 @@ function update(time, delta){
     if(this.level5finish === 1){
         game.sound.stopAll();
         this.sound.play("rosa");
-    }
+
  }
 
 
