@@ -163,7 +163,6 @@ function update(time, delta){
     this.level2finish = jeu.world.level2finish;
     this.level3finish = jeu.world.level3finish;
     this.level4finish = jeu.world.level4finish;
-    console.log(this.level1finish)
 
 //start menu
     //sound
