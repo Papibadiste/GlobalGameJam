@@ -387,6 +387,11 @@ function update(time, delta){
 
 
     }
+
+    if(this.level1finish === 0 || this.level2finish === 0|| this.level3finish === 0|| this.level4finish === 0){
+    }else {
+        levelselect5.setInteractive();
+    }
  }
 
 
