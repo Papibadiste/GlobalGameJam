@@ -11,6 +11,7 @@ var world = {
     level2finish : 0,
     level3finish : 0,
     level4finish : 0,
+    level5finish : 0,
 
     initialiserWorld2 : function(){
         this.tilemap = jeu.scene.make.tilemap({key: "map"});
@@ -126,6 +127,31 @@ var world = {
     },finlevel4 : function(){
         jeu.player.finlevel()
         this.level4finish = 1
+        this.fin = 1
+
+    },
+    initialiserWorld5 : function(){
+        this.tilemap = jeu.scene.make.tilemap({key: "maplvl5"});
+        this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
+        this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+        this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
+        this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+        this.overlapLayer = this.tilemap.createDynamicLayer("overlap",  this.tileset,0,0);
+
+        this.positionDebut = this.tilemap.findObject("Object" , obj => obj.name === "debut")
+        this.positionfin = this.tilemap.findObject("Object" , obj => obj.name === "fin")
+
+        this.worldLayer.setCollisionByProperty({Collides : true});
+        jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+        this.overlapLayer.setTileIndexCallback(471,this.finlevel5,this)
+        this.overlapLayer.setTileIndexCallback(514,this.finlevel5,this)
+        this.overlapLayer.setTileIndexCallback(563,this.finlevel5,this)
+        this.overlapLayer.setTileIndexCallback(608,this.finlevel5,this)
+        this.overlapLayer.setTileIndexCallback(609,this.finlevel5,this)
+
+    },finlevel5 : function(){
+        jeu.player.finlevel()
+        this.level5finish = 1
         this.fin = 1
 
     }

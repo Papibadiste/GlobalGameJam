@@ -14,6 +14,7 @@ var level3finish = 0;
 var level3start = 0;
 var level4finish = 0;
 var level4start = 0;
+var level5finish = 0;
 var level5start = 0;
 var command = 0;
 
@@ -54,6 +55,7 @@ function preload(){
     jeu.scene.load.tilemapTiledJSON("maplvl1","json/niveau_1.json");
     jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
     jeu.scene.load.tilemapTiledJSON("maplvl4","json/niveau_4.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl5","json/niveau_5.json");
 
     // perso
 
@@ -148,6 +150,10 @@ function create(){
 
     levelselect4.on('pointerdown',function(){
         level4start = 1
+    })
+
+    levelselect5.on('pointerdown',function(){
+        level5start = 1
     })
 
     jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
@@ -382,6 +388,38 @@ function update(time, delta){
 
 
 
+    }
+
+    if (level5start === 1){
+        level5start = 0
+        game.sound.stopAll();
+        command = 1;
+        jeu.world.fin = 0
+        if (soundactive === 1 ) {
+            this.sound.play("levelsong");
+
+        }
+
+
+        // world
+        jeu.world.initialiserWorld5();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+
+        jeu.world.gererCollider();
+
+        jeu.world.gererCamera();
+
+
+
+
+    }
+
+    if(this.level5finish === 1){
+        game.sound.stopAll();
+        this.sound.play("rosa");
     }
  }
 
