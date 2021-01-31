@@ -100,9 +100,13 @@ function create(){
     this.add.text(265, 315, "1", policetitre)
     levelselect2 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30).setInteractive();
     this.add.text(390, 315, "2", policetitre)
-    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30).setInteractive();
+    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30)
     this.add.text(510, 365, "5", policetitre)
-    redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
+    if(this.level1finish === 0 || this.level2finish === 0|| this.level3finish === 0|| this.level4finish === 0){
+        redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
+    }else {
+        levelselect5.setInteractive();
+    }
     historia = this.add.sprite(positionDecorX, 550 ,"levelselect").setScale( 1.3 , 0.30).setInteractive();
     this.add.text(290, 525, "Historia", policetitre)
 
