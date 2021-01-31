@@ -46,6 +46,7 @@ function preload(){
     this.load.image("paper","images/menu/paper.png");
     this.load.image("redcross","images/menu/redcross.png");
     this.load.audio("rosa","sounds/rosa.ogg");
+    this.load.audio("Merci","sounds/Merci.ogg");
     this.load.audio("levelsong","sounds/levelsong.ogg");
 
     // niveau 1
@@ -83,6 +84,7 @@ function create(){
     this.level2finish = jeu.world.level2finish;
     this.level3finish = jeu.world.level3finish;
     this.level4finish = jeu.world.level4finish;
+    this.level5finish = jeu.world.level5finish;
 
 
     //tittle
@@ -165,7 +167,7 @@ function create(){
 
 
 }
-function update(time, delta){
+function update(time, delta) {
 
     this.level1finish = jeu.world.level1finish;
     this.level2finish = jeu.world.level2finish;
@@ -174,27 +176,43 @@ function update(time, delta){
 
 //start menu
     //sound
-    if (soundactive === 1){
-        sound = this.add.sprite(769, 15 ,"sound_on");
-    }else if(soundactive === 0){
-        sound = this.add.sprite(769, 15 ,"sound_off");
+    if (soundactive === 1) {
+        sound = this.add.sprite(769, 15, "sound_on");
+    } else if (soundactive === 0) {
+        sound = this.add.sprite(769, 15, "sound_off");
     }
 
-    if (soundactive === 1 && soundready === 1){
+    if (soundactive === 1 && soundready === 1) {
         this.sound.play("rosa");
         soundready = 0
-    }else if (soundactive === 0){
+    } else if (soundactive === 0) {
         game.sound.stopAll();
         soundready = 1
     }
 
-    if (pophistoria === 1 && paperready === 1){
+    if (pophistoria === 1 && paperready === 1) {
         paperready = 0
-        historipaper = this.add.sprite(400, 300 ,"paper").setInteractive();
-        if( this.level1finish === 1 ){ policep1 = policehistoria }else{ policep1 = policehistoria2 }
-        if( this.level2finish === 1 ){ policep2 = policehistoria }else{ policep2 = policehistoria2 }
-        if( this.level3finish === 1 ){ policep3 = policehistoria }else{ policep3 = policehistoria2 }
-        if( this.level4finish === 1 ){ policep4 = policehistoria }else{ policep4 = policehistoria2 }
+        historipaper = this.add.sprite(400, 300, "paper").setInteractive();
+        if (this.level1finish === 1) {
+            policep1 = policehistoria
+        } else {
+            policep1 = policehistoria2
+        }
+        if (this.level2finish === 1) {
+            policep2 = policehistoria
+        } else {
+            policep2 = policehistoria2
+        }
+        if (this.level3finish === 1) {
+            policep3 = policehistoria
+        } else {
+            policep3 = policehistoria2
+        }
+        if (this.level4finish === 1) {
+            policep4 = policehistoria
+        } else {
+            policep4 = policehistoria2
+        }
         //paragraphe1
         textp1n1 = this.add.text(200, 75, "Cher Naminé,", policep1)
         textp1n2 = this.add.text(200, 115, "Tu as réussi a touvé le premier morceau de la table de ", policep1)
@@ -221,9 +239,9 @@ function update(time, delta){
         textp4n7 = this.add.text(200, 515, "Américana John", policep4)
     }
 
-    if(historipaper !== null){
-        historipaper.on('pointerdown',function(){
-            if (pophistoria === 1){
+    if (historipaper !== null) {
+        historipaper.on('pointerdown', function () {
+            if (pophistoria === 1) {
                 pophistoria = 0
                 paperready = 0
                 historipaper.setVisible(false)
@@ -255,7 +273,7 @@ function update(time, delta){
         })
     }
 
-    if(level1finish === 1 && level2finish === 1 && level3finish === 1 && level4finish === 1 ){
+    if (level1finish === 1 && level2finish === 1 && level3finish === 1 && level4finish === 1) {
 
         redcross.setVisible(false)
 
@@ -264,39 +282,37 @@ function update(time, delta){
 //end menu
 
 
-  if (level2start === 1){
-     level2start = 0
-     game.sound.stopAll();
-    command = 1;
-      jeu.world.fin = 0
-     if (soundactive === 1 ) {
-         this.sound.play("levelsong");
+    if (level2start === 1) {
+        level2start = 0
+        game.sound.stopAll();
+        command = 1;
+        jeu.world.fin = 0
+        if (soundactive === 1) {
+            this.sound.play("levelsong");
 
-     }
-
-
-      // world
-      jeu.world.initialiserWorld2();
-
-      // player
-      jeu.player.initialiserPlayer();
-      jeu.player.generatePlayerAnimations();
-
-      jeu.world.gererCollider();
-
-      jeu.world.gererCamera();
+        }
 
 
+        // world
+        jeu.world.initialiserWorld2();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+
+        jeu.world.gererCollider();
+
+        jeu.world.gererCamera();
 
 
     }
 
-    if (level1start === 1){
+    if (level1start === 1) {
         level1start = 0
         game.sound.stopAll();
         command = 1;
         jeu.world.fin = 0
-        if (soundactive === 1 ) {
+        if (soundactive === 1) {
             this.sound.play("levelsong");
 
         }
@@ -314,27 +330,25 @@ function update(time, delta){
         jeu.world.gererCamera();
 
 
-
-
     }
 
-    if ( jeu.world.fin === 1){
+    if (jeu.world.fin === 1) {
         jeu.player = player
         jeu.scene.scene.restart();
         jeu.world.fin = 2
     }
-    if ( jeu.world.fin === 0) {
+    if (jeu.world.fin === 0) {
         if (command === 1) {
             jeu.player.gererDeplacement();
         }
     }
 
-    if (level3start === 1){
+    if (level3start === 1) {
         level3start = 0
         game.sound.stopAll();
         command = 1;
         jeu.world.fin = 0
-        if (soundactive === 1 ) {
+        if (soundactive === 1) {
             this.sound.play("levelsong");
 
         }
@@ -352,27 +366,25 @@ function update(time, delta){
         jeu.world.gererCamera();
 
 
-
-
     }
 
-    if ( jeu.world.fin === 1){
+    if (jeu.world.fin === 1) {
         jeu.player = player
         jeu.scene.scene.restart();
         jeu.world.fin = 2
     }
-    if ( jeu.world.fin === 0) {
+    if (jeu.world.fin === 0) {
         if (command === 1) {
             jeu.player.gererDeplacement();
         }
     }
 
-    if (level4start === 1){
+    if (level4start === 1) {
         level4start = 0
         game.sound.stopAll();
         command = 1;
         jeu.world.fin = 0
-        if (soundactive === 1 ) {
+        if (soundactive === 1) {
             this.sound.play("levelsong");
 
         }
@@ -390,15 +402,13 @@ function update(time, delta){
         jeu.world.gererCamera();
 
 
-
-
     }
-    if (level5start === 1){
+    if (level5start === 1) {
         level5start = 0
         game.sound.stopAll();
         command = 1;
         jeu.world.fin = 0
-        if (soundactive === 1 ) {
+        if (soundactive === 1) {
             this.sound.play("levelsong");
 
         }
@@ -416,15 +426,15 @@ function update(time, delta){
         jeu.world.gererCamera();
 
 
-
-
     }
 
-    if(this.level5finish === 1){
+    if (this.level5finish === 1) {
+        this.level5finish = 0
         game.sound.stopAll();
-        this.sound.play("rosa");
+        this.sound.play("Merci");
 
- }
+    }
+}
 
 
 
