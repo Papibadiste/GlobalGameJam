@@ -232,8 +232,8 @@ function update(time, delta) {
         //paragraphe4
         textp4n1 = this.add.text(200, 385, "Par contre si tu as reussi à récuperer les 4 morceaux?", policep4)
         textp4n2 = this.add.text(200, 405, "pourrais-tu me les ramener? Car comment dire ?", policep4)
-        textp4n3 = this.add.text(200, 425, "J'aimerai bien retrouver ma notoriété car cela ,", policep4)
-        textp4n4 = this.add.text(200, 445, "commence à me déranger dans la vie de tous les jours. ", policep4)
+        textp4n3 = this.add.text(200, 425, "J'aimerai bien revoir le 4 morceaux de la piere, pourrais", policep4)
+        textp4n4 = this.add.text(200, 445, "tu les rammener au musée stp. Merci d'avance", policep4)
         textp4n5 = this.add.text(200, 465, "Sois utile pour une fois :D", policep4)
         textp4n6 = this.add.text(200, 495, "Cordialement,", policep4)
         textp4n7 = this.add.text(200, 515, "Américana John", policep4)
