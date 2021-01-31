@@ -50,7 +50,7 @@ function preload(){
     // niveau 1
 
     jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
-    jeu.scene.load.tilemapTiledJSON("map","json/niveautest.json");
+    jeu.scene.load.tilemapTiledJSON("map","json/niveau_2.json");
 
     // perso
 

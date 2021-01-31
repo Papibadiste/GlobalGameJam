@@ -2,8 +2,9 @@ var player = {
     aPlayer : null,
     isJumping : false, 
     initialiserPlayer : function(){
-        this.aPlayer =  jeu.scene.physics.add.sprite(200,200,"player","Idle").setScale(0.20);
+        this.aPlayer =  jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player","Idle").setScale(0.20);
         this.aPlayer.setCollideWorldBounds(true);
+        this.aPlayer.setOrigin(0.5,1);
     },
     generatePlayerAnimations: function(){
         jeu.scene.anims.create({
@@ -37,7 +38,7 @@ var player = {
             this.aPlayer.setVelocityX(0);
         }
         if(jeu.cursor.up.isDown && this.aPlayer.body.onFloor()) {
-            this.aPlayer.setVelocityY(-350);
+            this.aPlayer.setVelocityY(-500);
         }
 
         if(this.aPlayer.body.onFloor()){
