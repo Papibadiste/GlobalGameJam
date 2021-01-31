@@ -33,10 +33,6 @@ var gestionPage = {
                 data.contentType = "image/png";
                 data.dossier = "assets/"
                 break
-            case ".json" :
-                data.contentType = "application/json";
-                data.dossier = "assets/"
-                break;
             case ".jpg" :
                 data.contentType = "image/jpeg";
                 data.dossier = "assets/"

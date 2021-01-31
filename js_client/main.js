@@ -1,21 +1,25 @@
-var soundactive = 1 ;
+var config = {
+    type : Phaser.AUTO,
+    width : 800,
+    height : 600,
+    scene : {
+        preload : preload,
+        create : create,
+        update : update
+    }
+}
 
+const game = new Phaser.Game(config);
+var soundactive = 0 ;
 var soundready = 1 ;
 var pophistoria = 0 ;
 var paperready = 1 ;
 var historipaper = null ;
-var camera = 0
 
 var level1finish = 0;
-var level1start = 0;
 var level2finish = 0;
-var level2start = 0;
 var level3finish = 0;
-var level3start = 0;
 var level4finish = 0;
-var level4start = 0;
-var level5start = 0;
-var command = 0;
 
 var policehistoria = {
     fontSize : "12px",
@@ -29,14 +33,7 @@ var policehistoria2 = {
     fontFamily: "Miss Fajardose"
 }
 
-var jeu = {
-    scene : null,
-    world : world,
-    player : player,
-    cursor : null
-}
 function preload(){
-    jeu.scene = this;
     this.load.image("decor","images/decor/png/BG.png");
     this.load.image("wood","images/menu/wood.png");
     this.load.image("levelselect","images/menu/letter.png");
@@ -45,23 +42,8 @@ function preload(){
     this.load.image("paper","images/menu/paper.png");
     this.load.image("redcross","images/menu/redcross.png");
     this.load.audio("rosa","sounds/rosa.ogg");
-    this.load.audio("levelsong","sounds/levelsong.ogg");
-
-    // niveau 1
-
-    jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
-    jeu.scene.load.tilemapTiledJSON("map","json/niveau_2.json");
-    jeu.scene.load.tilemapTiledJSON("maplvl1","json/niveau_1.json");
-    jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
-    jeu.scene.load.tilemapTiledJSON("maplvl4","json/niveau_4.json");
-
-    // perso
-
-    jeu.scene.load.atlas("player","images/perso/player.png", "images/perso/playerAtlas.json");
-
 
 }
-
 function create(){
 //start menu
     var positionDecorX = this.cameras.main.centerX;
@@ -77,10 +59,7 @@ function create(){
         fontFamily: "Shojumaru"
     }
 
-    this.level1finish = jeu.world.level1finish;
-    this.level2finish = jeu.world.level2finish;
-    this.level3finish = jeu.world.level3finish;
-    this.level4finish = jeu.world.level4finish;
+
 
 
     //tittle
@@ -94,21 +73,17 @@ function create(){
     wood.setScale( 0.8,0.60);
 
     //level card
-    levelselect3 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30).setInteractive();
+    levelselect1 = this.add.sprite(275, 440 ,"levelselect").setScale( 0.30);
     this.add.text(265, 415, "3", policetitre)
-    levelselect4 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30).setInteractive();
+    levelselect2 = this.add.sprite(405, 440 ,"levelselect").setScale( 0.30);
     this.add.text(390, 415, "4", policetitre)
-    levelselect1 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30).setInteractive();
+    levelselect3 = this.add.sprite(275, 340 ,"levelselect").setScale( 0.30);
     this.add.text(265, 315, "1", policetitre)
-    levelselect2 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30).setInteractive();
+    levelselect4 = this.add.sprite(405, 340 ,"levelselect").setScale( 0.30);
     this.add.text(390, 315, "2", policetitre)
-    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30)
+    levelselect5 = this.add.sprite(525, 390 ,"levelselect").setScale( 0.30);
     this.add.text(510, 365, "5", policetitre)
-    if(this.level1finish === 0 || this.level2finish === 0|| this.level3finish === 0|| this.level4finish === 0){
-        redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
-    }else {
-        levelselect5.setInteractive();
-    }
+    redcross = this.add.sprite(525, 390 ,"redcross").setScale( 0.10);
     historia = this.add.sprite(positionDecorX, 550 ,"levelselect").setScale( 1.3 , 0.30).setInteractive();
     this.add.text(290, 525, "Historia", policetitre)
 
@@ -135,37 +110,9 @@ function create(){
         }
     })
 
-    //pop up level
-    levelselect1.on('pointerdown',function(){
-        level1start = 1
-    })
-
-    levelselect2.on('pointerdown',function(){
-        level2start = 1
-    })
-
-    levelselect3.on('pointerdown',function(){
-        level3start = 1
-    })
-
-    levelselect4.on('pointerdown',function(){
-        level4start = 1
-    })
-
-    jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
-
-
-
-
 
 }
 function update(time, delta){
-
-    this.level1finish = jeu.world.level1finish;
-    this.level2finish = jeu.world.level2finish;
-    this.level3finish = jeu.world.level3finish;
-    this.level4finish = jeu.world.level4finish;
-
 //start menu
     //sound
     if (soundactive === 1){
@@ -185,10 +132,10 @@ function update(time, delta){
     if (pophistoria === 1 && paperready === 1){
         paperready = 0
         historipaper = this.add.sprite(400, 300 ,"paper").setInteractive();
-        if( this.level1finish === 1 ){ policep1 = policehistoria }else{ policep1 = policehistoria2 }
-        if( this.level2finish === 1 ){ policep2 = policehistoria }else{ policep2 = policehistoria2 }
-        if( this.level3finish === 1 ){ policep3 = policehistoria }else{ policep3 = policehistoria2 }
-        if( this.level4finish === 1 ){ policep4 = policehistoria }else{ policep4 = policehistoria2 }
+        if( level1finish === 1 ){ policep1 = policehistoria }else{ policep1 = policehistoria2 }
+        if( level2finish === 1 ){ policep2 = policehistoria }else{ policep2 = policehistoria2 }
+        if( level3finish === 1 ){ policep3 = policehistoria }else{ policep3 = policehistoria2 }
+        if( level4finish === 1 ){ policep4 = policehistoria }else{ policep4 = policehistoria2 }
         //paragraphe1
         textp1n1 = this.add.text(200, 75, "Cher Naminé,", policep1)
         textp1n2 = this.add.text(200, 115, "Tu as réussi a touvé le premier morceau de la table de ", policep1)
@@ -256,142 +203,4 @@ function update(time, delta){
     }
 
 //end menu
-
-
-  if (level2start === 1){
-     level2start = 0
-     game.sound.stopAll();
-    command = 1;
-      jeu.world.fin = 0
-     if (soundactive === 1 ) {
-         this.sound.play("levelsong");
-
-     }
-
-
-      // world
-      jeu.world.initialiserWorld2();
-
-      // player
-      jeu.player.initialiserPlayer();
-      jeu.player.generatePlayerAnimations();
-
-      jeu.world.gererCollider();
-
-      jeu.world.gererCamera();
-
-
-
-
-    }
-
-    if (level1start === 1){
-        level1start = 0
-        game.sound.stopAll();
-        command = 1;
-        jeu.world.fin = 0
-        if (soundactive === 1 ) {
-            this.sound.play("levelsong");
-
-        }
-
-
-        // world
-        jeu.world.initialiserWorld1();
-
-        // player
-        jeu.player.initialiserPlayer();
-        jeu.player.generatePlayerAnimations();
-
-        jeu.world.gererCollider();
-
-        jeu.world.gererCamera();
-
-
-
-
-    }
-
-    if ( jeu.world.fin === 1){
-        jeu.player = player
-        jeu.scene.scene.restart();
-        jeu.world.fin = 2
-    }
-    if ( jeu.world.fin === 0) {
-        if (command === 1) {
-            jeu.player.gererDeplacement();
-        }
-    }
-
-    if (level3start === 1){
-        level3start = 0
-        game.sound.stopAll();
-        command = 1;
-        jeu.world.fin = 0
-        if (soundactive === 1 ) {
-            this.sound.play("levelsong");
-
-        }
-
-
-        // world
-        jeu.world.initialiserWorld3();
-
-        // player
-        jeu.player.initialiserPlayer();
-        jeu.player.generatePlayerAnimations();
-
-        jeu.world.gererCollider();
-
-        jeu.world.gererCamera();
-
-
-
-
-    }
-
-    if ( jeu.world.fin === 1){
-        jeu.player = player
-        jeu.scene.scene.restart();
-        jeu.world.fin = 2
-    }
-    if ( jeu.world.fin === 0) {
-        if (command === 1) {
-            jeu.player.gererDeplacement();
-        }
-    }
-
-    if (level4start === 1){
-        level4start = 0
-        game.sound.stopAll();
-        command = 1;
-        jeu.world.fin = 0
-        if (soundactive === 1 ) {
-            this.sound.play("levelsong");
-
-        }
-
-
-        // world
-        jeu.world.initialiserWorld4();
-
-        // player
-        jeu.player.initialiserPlayer();
-        jeu.player.generatePlayerAnimations();
-
-        jeu.world.gererCollider();
-
-        jeu.world.gererCamera();
-
-
-
-
-    }
- }
-
-
-
- 
-
-
-
+}
