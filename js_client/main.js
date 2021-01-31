@@ -1,4 +1,3 @@
-
 var soundactive = 1 ;
 
 var soundready = 1 ;
@@ -16,6 +15,7 @@ var level3start = 0;
 var level4finish = 0;
 var level4start = 0;
 var level5start = 0;
+var command = 0;
 
 var policehistoria = {
     fontSize : "12px",
@@ -32,7 +32,8 @@ var policehistoria2 = {
 var jeu = {
     scene : null,
     world : world,
-    player : player
+    player : player,
+    cursor : null
 }
 function preload(){
     jeu.scene = this;
@@ -127,7 +128,7 @@ function create(){
         level1start = 1
     })
 
-
+    jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
 
     
 
@@ -135,6 +136,7 @@ function create(){
     
 }
 function update(time, delta){
+    
 //start menu
     //sound
     if (soundactive === 1){
@@ -223,12 +225,12 @@ function update(time, delta){
     }
 
 //end menu
-
+ 
   
   if (level1start === 1){
      level1start = 0
      game.sound.stopAll();
-
+    command = 1;
      if (soundactive === 1 ) {
          this.sound.play("levelsong");
 
@@ -241,10 +243,24 @@ function update(time, delta){
       // player
       jeu.player.initialiserPlayer();
       jeu.player.generatePlayerAnimations();
-      jeu.player.aPlayer.anims.play("playerWalk");
-
+      
+      jeu.world.gererCollider();
+      
+      jeu.world.gererCamera();
+     
+     
+          
+     
+    }
+    
+    if(command === 1 ){
+        if(jeu.cursor.left.isDown){
+            console.log("Coucou");
+        }
+        jeu.player.gererDeplacement();
+    }
  }
-}
+
 
 
  
