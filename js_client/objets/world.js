@@ -77,6 +77,57 @@ var world = {
         this.level3finish = 1
         this.fin = 1
 
+    },
+
+    initialiserWorld1 : function(){
+        this.tilemap = jeu.scene.make.tilemap({key: "maplvl1"});
+        this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
+        this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+        this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
+        this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+        this.overlapLayer = this.tilemap.createDynamicLayer("overlap",  this.tileset,0,0);
+
+        this.positionDebut = this.tilemap.findObject("Object" , obj => obj.name === "debut")
+        this.positionfin = this.tilemap.findObject("Object" , obj => obj.name === "fin")
+
+        this.worldLayer.setCollisionByProperty({Collides : true});
+        jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+        this.overlapLayer.setTileIndexCallback(37,this.finlevel3,this)
+        this.overlapLayer.setTileIndexCallback(38,this.finlevel3,this)
+        this.overlapLayer.setTileIndexCallback(42,this.finlevel3,this)
+
+    },finlevel3 : function(){
+        jeu.player.finlevel()
+        this.level1finish = 1
+        this.fin = 1
+
+    },
+    initialiserWorld4 : function(){
+        this.tilemap = jeu.scene.make.tilemap({key: "maplvl4"});
+        this.tileset =  this.tilemap.addTilesetImage("tilesheet","tiles");
+        this.downLayer =  this.tilemap.createStaticLayer("bot", this.tileset,0,0);
+        this.worldLayer =  this.tilemap.createStaticLayer("world",  this.tileset,0,0);
+        this.topLayer = this.tilemap.createStaticLayer("top",  this.tileset,0,0);
+        this.overlapLayer = this.tilemap.createDynamicLayer("overlap",  this.tileset,0,0);
+
+        this.positionDebut = this.tilemap.findObject("Object" , obj => obj.name === "debut")
+        this.positionfin = this.tilemap.findObject("Object" , obj => obj.name === "fin")
+
+        this.worldLayer.setCollisionByProperty({Collides : true});
+        jeu.scene.physics.world.setBounds(0,0,this.tilemap.widthInPixels,this.tilemap.heightInPixels);
+        this.overlapLayer.setTileIndexCallback(317,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(318,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(363,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(409,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(410,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(455,this.finlevel4,this)
+        this.overlapLayer.setTileIndexCallback(456,this.finlevel4,this)
+
+    },finlevel4 : function(){
+        jeu.player.finlevel()
+        this.level4finish = 1
+        this.fin = 1
+
     }
     
 }

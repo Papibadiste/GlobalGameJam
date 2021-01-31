@@ -51,7 +51,9 @@ function preload(){
 
     jeu.scene.load.image("tiles", "images/decor/png/Tile/tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("map","json/niveau_2.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl1","json/niveau_1.json");
     jeu.scene.load.tilemapTiledJSON("maplvl3","json/niveau_3.json");
+    jeu.scene.load.tilemapTiledJSON("maplvl4","json/niveau_4.json");
 
     // perso
 
@@ -75,7 +77,10 @@ function create(){
         fontFamily: "Shojumaru"
     }
 
-
+    this.level1finish = jeu.world.level1finish;
+    this.level2finish = jeu.world.level2finish;
+    this.level3finish = jeu.world.level3finish;
+    this.level4finish = jeu.world.level4finish;
 
 
     //tittle
@@ -125,12 +130,20 @@ function create(){
     })
 
     //pop up level
+    levelselect1.on('pointerdown',function(){
+        level1start = 1
+    })
+
     levelselect2.on('pointerdown',function(){
         level2start = 1
     })
 
     levelselect3.on('pointerdown',function(){
         level3start = 1
+    })
+
+    levelselect4.on('pointerdown',function(){
+        level4start = 1
     })
 
     jeu.cursor = jeu.scene.input.keyboard.createCursorKeys();
@@ -141,6 +154,12 @@ function create(){
 
 }
 function update(time, delta){
+
+    this.level1finish = jeu.world.level1finish;
+    this.level2finish = jeu.world.level2finish;
+    this.level3finish = jeu.world.level3finish;
+    this.level4finish = jeu.world.level4finish;
+    console.log(this.level1finish)
 
 //start menu
     //sound
@@ -161,10 +180,10 @@ function update(time, delta){
     if (pophistoria === 1 && paperready === 1){
         paperready = 0
         historipaper = this.add.sprite(400, 300 ,"paper").setInteractive();
-        if( level1finish === 1 ){ policep1 = policehistoria }else{ policep1 = policehistoria2 }
-        if( level2finish === 1 ){ policep2 = policehistoria }else{ policep2 = policehistoria2 }
-        if( level3finish === 1 ){ policep3 = policehistoria }else{ policep3 = policehistoria2 }
-        if( level4finish === 1 ){ policep4 = policehistoria }else{ policep4 = policehistoria2 }
+        if( this.level1finish === 1 ){ policep1 = policehistoria }else{ policep1 = policehistoria2 }
+        if( this.level2finish === 1 ){ policep2 = policehistoria }else{ policep2 = policehistoria2 }
+        if( this.level3finish === 1 ){ policep3 = policehistoria }else{ policep3 = policehistoria2 }
+        if( this.level4finish === 1 ){ policep4 = policehistoria }else{ policep4 = policehistoria2 }
         //paragraphe1
         textp1n1 = this.add.text(200, 75, "Cher Naminé,", policep1)
         textp1n2 = this.add.text(200, 115, "Tu as réussi a touvé le premier morceau de la table de ", policep1)
@@ -236,6 +255,7 @@ function update(time, delta){
      level2start = 0
      game.sound.stopAll();
     command = 1;
+      jeu.world.fin = 0
      if (soundactive === 1 ) {
          this.sound.play("levelsong");
 
@@ -258,6 +278,33 @@ function update(time, delta){
 
     }
 
+    if (level1start === 1){
+        level1start = 0
+        game.sound.stopAll();
+        command = 1;
+        jeu.world.fin = 0
+        if (soundactive === 1 ) {
+            this.sound.play("levelsong");
+
+        }
+
+
+        // world
+        jeu.world.initialiserWorld1();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+
+        jeu.world.gererCollider();
+
+        jeu.world.gererCamera();
+
+
+
+
+    }
+
     if ( jeu.world.fin === 1){
         jeu.player = player
         jeu.scene.scene.restart();
@@ -265,10 +312,6 @@ function update(time, delta){
     }
     if ( jeu.world.fin === 0) {
         if (command === 1) {
-            if (jeu.cursor.left.isDown) {
-                console.log("Coucou");
-            }
-
             jeu.player.gererDeplacement();
         }
     }
@@ -277,6 +320,7 @@ function update(time, delta){
         level3start = 0
         game.sound.stopAll();
         command = 1;
+        jeu.world.fin = 0
         if (soundactive === 1 ) {
             this.sound.play("levelsong");
 
@@ -306,12 +350,35 @@ function update(time, delta){
     }
     if ( jeu.world.fin === 0) {
         if (command === 1) {
-            if (jeu.cursor.left.isDown) {
-                console.log("Coucou");
-            }
-
             jeu.player.gererDeplacement();
         }
+    }
+
+    if (level4start === 1){
+        level4start = 0
+        game.sound.stopAll();
+        command = 1;
+        jeu.world.fin = 0
+        if (soundactive === 1 ) {
+            this.sound.play("levelsong");
+
+        }
+
+
+        // world
+        jeu.world.initialiserWorld4();
+
+        // player
+        jeu.player.initialiserPlayer();
+        jeu.player.generatePlayerAnimations();
+
+        jeu.world.gererCollider();
+
+        jeu.world.gererCamera();
+
+
+
+
     }
  }
 
