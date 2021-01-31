@@ -253,11 +253,19 @@ function update(time, delta){
 
     }
 
-    if(command === 1 ){
-        if(jeu.cursor.left.isDown){
-            console.log("Coucou");
+    if ( jeu.world.fin === 1){
+        jeu.player = player
+        jeu.scene.scene.restart();
+        jeu.world.fin = 2
+    }
+    if ( jeu.world.fin === 0) {
+        if (command === 1) {
+            if (jeu.cursor.left.isDown) {
+                console.log("Coucou");
+            }
+
+            jeu.player.gererDeplacement();
         }
-        jeu.player.gererDeplacement();
     }
  }
 

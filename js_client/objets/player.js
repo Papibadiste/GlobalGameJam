@@ -1,6 +1,7 @@
 var player = { 
     aPlayer : null,
-    isJumping : false, 
+    isJumping : false,
+    fin : 0,
     initialiserPlayer : function(){
         this.aPlayer =  jeu.scene.physics.add.sprite(jeu.world.positionDebut.x,jeu.world.positionDebut.y,"player","Idle").setScale(0.20);
         this.aPlayer.setCollideWorldBounds(true);
@@ -28,38 +29,50 @@ var player = {
         },
 
      gererDeplacement : function(){
-        if(jeu.cursor.left.isDown){
-            this.aPlayer.setVelocityX(-200);
-            this.aPlayer.setFlip(true,false);
-        } else if(jeu.cursor.right.isDown) {
-            this.aPlayer.setVelocityX(200);
-            this.aPlayer.setFlip(false,false);
-        }else {
-            this.aPlayer.setVelocityX(0);
-        }
-        if(jeu.cursor.up.isDown && this.aPlayer.body.onFloor()) {
-            this.aPlayer.setVelocityY(-500);
-        }
-
-        if(this.aPlayer.body.onFloor()){
-            this.isJumping = false;
-        } else {
-            this.isJumping = true;
-        }
-
-        if(this.isJumping === true){
-            if(jeu.cursor.up.isDown)
-            {
-                this.aPlayer.anims.play("playerJump",true);
-            }
-        } else {
+        if(this.fin === 0){
             if(jeu.cursor.left.isDown){
-                this.aPlayer.anims.play("playerWalk",true);
+                this.aPlayer.setVelocityX(-200);
+                this.aPlayer.setFlip(true,false);
             } else if(jeu.cursor.right.isDown) {
-                this.aPlayer.anims.play("playerWalk",true);
+                this.aPlayer.setVelocityX(200);
+                this.aPlayer.setFlip(false,false);
             }else {
-                this.aPlayer.anims.play("playerIdle",true);
+                this.aPlayer.setVelocityX(0);
             }
+            if(jeu.cursor.up.isDown && this.aPlayer.body.onFloor()) {
+                this.aPlayer.setVelocityY(-500);
+            }
+
+            if(this.aPlayer.body.onFloor()){
+                this.isJumping = false;
+            } else {
+                this.isJumping = true;
+            }
+
+            if(this.isJumping === true){
+                if(jeu.cursor.up.isDown)
+                {
+                    this.aPlayer.anims.play("playerJump",true);
+                }
+            } else {
+                if(jeu.cursor.left.isDown){
+                    this.aPlayer.anims.play("playerWalk",true);
+                } else if(jeu.cursor.right.isDown) {
+                    this.aPlayer.anims.play("playerWalk",true);
+                }else {
+                    this.aPlayer.anims.play("playerIdle",true);
+                }
+            }
+        }else{
+            this.aPlayer.setVelocityX(0);
+            this.aPlayer.setVelocityY(0);
+            this.fin = 0
+
         }
+
+    },
+
+    finlevel : function(){
+        this.fin = 1
     }
 }
